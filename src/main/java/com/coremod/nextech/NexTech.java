@@ -1,4 +1,6 @@
-package com.example.examplemod;
+package com.coremod.nextech;
+
+import com.coremod.nextech.machine.flame.flame;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
@@ -6,6 +8,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEv
 import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.gregtechceu.gtceu.api.recipe.category.GTRecipeCategory;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.api.sound.SoundEntry;
 
@@ -22,15 +25,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(ExampleMod.MOD_ID)
+@Mod(NexTech.MOD_ID)
 @SuppressWarnings("removal")
-public class ExampleMod {
+public class NexTech {
 
-    public static final String MOD_ID = "examplemod";
+    public static final String MOD_ID = "nextech";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static GTRegistrate EXAMPLE_REGISTRATE = GTRegistrate.create(ExampleMod.MOD_ID);
+    public static GTRegistrate NEXTECH_REGISTRATE = GTRegistrate.create(NexTech.MOD_ID);
 
-    public ExampleMod() {
+    public NexTech() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
@@ -40,6 +43,8 @@ public class ExampleMod {
         modEventBus.addListener(this::addMaterials);
         modEventBus.addListener(this::modifyMaterials);
 
+        modEventBus.addGenericListener(GTRecipeCategory.class, this::registerRecipeCategories);
+
         modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
         modEventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
         modEventBus.addGenericListener(SoundEntry.class, this::registerSounds);
@@ -48,8 +53,7 @@ public class ExampleMod {
         // If we want to use annotations to register event listeners,
         // we need to register our object like this!
         MinecraftForge.EVENT_BUS.register(this);
-
-        EXAMPLE_REGISTRATE.registerRegistrate();
+        NEXTECH_REGISTRATE.registerRegistrate();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -81,7 +85,7 @@ public class ExampleMod {
      * @param event
      */
     private void addMaterialRegistries(MaterialRegistryEvent event) {
-        GTCEuAPI.materialManager.createRegistry(ExampleMod.MOD_ID);
+        GTCEuAPI.materialManager.createRegistry(NexTech.MOD_ID);
     }
 
     /**
@@ -110,7 +114,12 @@ public class ExampleMod {
      * @param event
      */
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
-        // CustomRecipeTypes.init();
+        NexTechItems.init();
+        NexTechRecipeTypes.init();
+    }
+
+    private void registerRecipeCategories(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeCategory> event) {
+        NexTechRecipeCategories.init();
     }
 
     /**
@@ -120,7 +129,7 @@ public class ExampleMod {
      * @param event
      */
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        // CustomMachines.init();
+        flame.init();
     }
 
     /**

@@ -1,12 +1,13 @@
 {
   "required": true,
-  "package": "com.example.examplemod.mixin",
+  "package": "com.coremod.nextech.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [
-    "DummyMixin"
+    "ResearchManagerDataItemMixin"
   ],
   "client": [
+    "GTRecipeWidgetMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,38 +1,47 @@
-package com.example.examplemod;
+package com.coremod.nextech;
 
+import com.coremod.nextech.recipe.recipes.NexTechRecipes;
+
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
+import com.gregtechceu.gtceu.api.recipe.category.GTRecipeCategory;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
 @GTAddon
-public class ExampleGTAddon implements IGTAddon {
+public class NexTechAddon implements IGTAddon {
 
     @Override
     public GTRegistrate getRegistrate() {
-        return ExampleMod.EXAMPLE_REGISTRATE;
+        return NexTech.NEXTECH_REGISTRATE;
     }
 
     @Override
     public void initializeAddon() {}
 
+    private void registerRecipeCategories(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeCategory> event) {
+        NexTechRecipeCategories.init();
+    }
+
     @Override
     public String addonModId() {
-        return ExampleMod.MOD_ID;
+        return NexTech.MOD_ID;
     }
 
     @Override
     public void registerTagPrefixes() {
-        // CustomTagPrefixes.init();
+        NexTechTagPrefixes.init();
     }
 
     @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
-        // CustomRecipes.init(provider);
+        NexTechRecipes.init(provider);
     }
 
     @Override
