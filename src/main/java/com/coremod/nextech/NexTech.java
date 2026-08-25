@@ -1,5 +1,6 @@
 package com.coremod.nextech;
 
+import com.coremod.nextech.machine.Hatch;
 import com.coremod.nextech.machine.flame.flame;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
@@ -130,6 +131,7 @@ public class NexTech {
      */
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         flame.init();
+        Hatch.init();
     }
 
     /**

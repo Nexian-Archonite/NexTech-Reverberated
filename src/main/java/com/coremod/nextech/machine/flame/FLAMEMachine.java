@@ -1,5 +1,6 @@
 package com.coremod.nextech.machine.flame;
 
+import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
@@ -9,7 +10,6 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.Content;
 import com.gregtechceu.gtceu.api.recipe.ingredient.FluidIngredient;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.data.GTRecipeCapabilities;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -18,14 +18,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidStack;
 
 import lombok.Getter;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
 
 public class FLAMEMachine extends WorkableElectricMultiblockMachine {
 
-    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(FLAMEMachine.class,
+    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
+            FLAMEMachine.class,
             WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
 
     @Persisted
@@ -41,9 +41,14 @@ public class FLAMEMachine extends WorkableElectricMultiblockMachine {
     protected TickableSubscription tryTickSub;
     private boolean startHeatLoss;
 
-    public FLAMEMachine(IMachineBlockEntity holder, int baseTemperature, int activeTempLoss, int dormantTempLoss,
+    public FLAMEMachine(
+                        IMachineBlockEntity holder,
+                        int baseTemperature,
+                        int activeTempLoss,
+                        int dormantTempLoss,
                         Object... args) {
         super(holder, args);
+
         this.temperature = baseTemperature;
         this.baseTemperature = baseTemperature;
         this.activeTempLoss = activeTempLoss;
@@ -51,13 +56,14 @@ public class FLAMEMachine extends WorkableElectricMultiblockMachine {
         this.startHeatLoss = false;
     }
 
-    public static Map<Material, Integer> fluidsMap = Map.of(
+    public static final Map<Material, Integer> FLAME_FUEL_HEAT = Map.of(
             GTMaterials.get("inactivated_infernality"), 150,
             GTMaterials.get("infernality_catalysm"), 400);
 
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
+
         this.startHeatLoss = true;
         this.temperatureChanged();
     }
@@ -65,15 +71,20 @@ public class FLAMEMachine extends WorkableElectricMultiblockMachine {
     @Override
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
-        textList.add(Component.translatable("ui.nextech.flame_crucible", this.temperature));
+
+        textList.add(
+                Component.translatable(
+                        "ui.nextech.flame_crucible",
+                        this.temperature));
     }
 
     public static Material getFLAMEHeatingLiquid(int temperature) {
         Material selectedFluid = null;
         int smallestCapAboveTemperature = Integer.MAX_VALUE;
 
-        for (Map.Entry<Material, Integer> entry : fluidsMap.entrySet()) {
+        for (Map.Entry<Material, Integer> entry : FLAME_FUEL_HEAT.entrySet()) {
             int fluidCap = entry.getValue();
+
             if (fluidCap >= temperature && fluidCap < smallestCapAboveTemperature) {
                 smallestCapAboveTemperature = fluidCap;
                 selectedFluid = entry.getKey();
@@ -91,14 +102,24 @@ public class FLAMEMachine extends WorkableElectricMultiblockMachine {
     @Override
     public void onLoad() {
         super.onLoad();
-        if (getLevel().isClientSide) return;
-        tryTickSub = subscribeServerTick(tryTickSub, this::tryRemoveHeat);
+
+        if (getLevel().isClientSide) {
+            return;
+        }
+
+        tryTickSub = subscribeServerTick(
+                tryTickSub,
+                this::tryRemoveHeat);
     }
 
     @Override
     public void onUnload() {
         super.onUnload();
-        if (getLevel().isClientSide) return;
+
+        if (getLevel().isClientSide) {
+            return;
+        }
+
         if (tryTickSub != null) {
             tryTickSub.unsubscribe();
             tryTickSub = null;
@@ -109,44 +130,72 @@ public class FLAMEMachine extends WorkableElectricMultiblockMachine {
         boolean machineActive = getRecipeLogic().isWorking();
         int interval = machineActive ? 400 : 200;
 
-        if (getOffsetTimer() % interval == 0 && this.startHeatLoss) {
-            if (machineActive) {
-                this.temperature = Math.max(this.temperature - activeTempLoss, baseTemperature);
-            } else {
-                this.temperature = Math.max(this.temperature - dormantTempLoss, baseTemperature);
-            }
-            this.temperatureChanged();
+        if (getOffsetTimer() % interval != 0 || !this.startHeatLoss) {
+            return;
         }
+
+        if (machineActive) {
+            this.temperature = Math.max(
+                    this.temperature - activeTempLoss,
+                    baseTemperature);
+        } else {
+            this.temperature = Math.max(
+                    this.temperature - dormantTempLoss,
+                    baseTemperature);
+        }
+
+        this.temperatureChanged();
     }
 
-    @Override
-    public boolean beforeWorking(@Nullable GTRecipe recipe) {
-        return super.beforeWorking(recipe);
+    public void onFuelRecipeCompleted(GTRecipe recipe) {
+        List<Content> content = recipe.getInputContents(
+                FluidRecipeCapability.CAP);
+
+        if (content.isEmpty()) {
+            return;
+        }
+
+        for (Content entry : content) {
+            if (!(entry.getContent() instanceof FluidIngredient ingredient)) {
+                continue;
+            }
+
+            FluidStack[] stacks = ingredient.getStacks();
+
+            if (stacks.length == 0) {
+                continue;
+            }
+
+            FluidStack fuelStack = stacks[0];
+
+            if (fuelStack.isEmpty()) {
+                continue;
+            }
+
+            Material material = ChemicalHelper.getMaterial(
+                    fuelStack.getFluid());
+
+            Integer maxHeat = FLAME_FUEL_HEAT.get(material);
+
+            if (maxHeat == null) {
+                continue;
+            }
+
+            int heatPerUnit = fuelStack.getFluid()
+                    .getFluidType()
+                    .getTemperature() / 1_000_000;
+
+            int amountInBuckets = fuelStack.getAmount() / 1000;
+            int amountToAdd = heatPerUnit * amountInBuckets;
+
+            this.temperature = Math.min(
+                    this.temperature + amountToAdd,
+                    maxHeat);
+
+            this.temperatureChanged();
+            return;
+        }
     }
 
     private void temperatureChanged() {}
-
-    @Override
-    public void afterWorking() {
-        super.afterWorking();
-        GTRecipe lastRecipe = getRecipeLogic().getLastRecipe();
-        List<Content> content = lastRecipe.getInputContents(GTRecipeCapabilities.FLUID);
-
-        if (content.isEmpty()) return;
-
-        if (content.get(0).getContent() instanceof FluidIngredient ingredient) {
-            FluidStack ingredientFluid = ingredient.getStacks()[0];
-            Material material = ChemicalHelper.getMaterial(ingredientFluid.getFluid());
-
-            if (fluidsMap.containsKey(material)) {
-                int maxHeat = fluidsMap.get(material);
-                if (this.temperature < maxHeat) {
-                    int addTemperature = ingredientFluid.getFluid().getFluidType().getTemperature() / 1_000_000;
-                    int amountToAdd = (int) (double) (ingredientFluid.getAmount() / 1000);
-                    this.temperature = Math.min(temperature + addTemperature * amountToAdd, maxHeat);
-                    this.temperatureChanged();
-                }
-            }
-        }
-    }
 }
