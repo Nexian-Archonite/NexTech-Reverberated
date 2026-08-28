@@ -1,5 +1,7 @@
 package com.coremod.nextech.machine.flame;
 
+import com.coremod.nextech.CreativeTabs;
+import com.coremod.nextech.NexTech;
 import com.coremod.nextech.NexTechRecipeTypes;
 import com.coremod.nextech.machine.partAbility.FLAMEPartAbilities;
 
@@ -17,13 +19,17 @@ import static com.coremod.nextech.NexTech.NEXTECH_REGISTRATE;
 
 public class flame {
 
+    static {
+        NexTech.NEXTECH_REGISTRATE.creativeModeTab(() -> CreativeTabs.NEXTECH_MACHINES_TAB);
+    }
+
     public static Block getKjsBlock(String name) {
         return ForgeRegistries.BLOCKS.getValue(new ResourceLocation("kubejs", name));
     }
 
     public static final MultiblockMachineDefinition FRACTO_LIMINAL_ABYSS_METAL_ENGINE = NEXTECH_REGISTRATE
             .multiblock("fracto_liminal_abyss_metal_engine",
-                    holder -> new FLAMEMachine(holder, 0, 5, 50))
+                    holder -> new FLAMEMachine(holder, 0, 1, 50))
             .appearanceBlock(() -> {
                 Block b = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("gtceu", "abyssal_netherite_casing"));
                 return b;
@@ -54,7 +60,7 @@ public class flame {
                                     .getValue(new ResourceLocation("gtceu", "abyssal_netherite_casing"))))
                     .where("C",
                             Predicates.blocks(ForgeRegistries.BLOCKS
-                                    .getValue(new ResourceLocation("gtceu", "vhaelcryite_frame"))))
+                                    .getValue(new ResourceLocation("gtceu", "activated_nexian_pyrite_frame"))))
                     .where("D", Predicates.blocks(getKjsBlock("aetherite_glass")))
                     .where("E",
                             Predicates

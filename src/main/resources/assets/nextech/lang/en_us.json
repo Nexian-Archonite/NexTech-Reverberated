@@ -1,0 +1,28 @@
+{
+    "ui.nextech.flame_crucible": "Crucible Temperature: %s MK",
+
+    "nextech.fractal_metal_alloyment": "§6Fractal §7Metal §1Alloyment",
+    "gtceu.recipe.category.flame_heating": "§6Crucible Heating",
+    "nextech.recipe.temperature": "Min Temp: §6%s MK",
+    "nextech.recipe.heating_fluid": "Fluid: %s",
+    "nextech.recipe.heat_per_cycle": "§6+%s MK§r per cycle (cap: %s §6MK§r)",
+
+    "nextech.tooltip.hyper_machine_1": "Each Coolant provides a boost:",
+    "nextech.tooltip.hyper_machine_coolant1": "%s: %sx CWU/t",
+    "nextech.tooltip.hyper_machine_coolant2": "%s: %sx CWU/t",
+    "nextech.tooltip.hyper_machine_coolant3": "%s: %sx CWU/t",
+    "nextech.tooltip.hyper_machine_coolant_base": "%s: %sx CWU/t",
+    "nextech.tooltip.hyper_machine_purpose": "An upgraded HPCA that uses %s, %s, or %s to provide cooling",
+    "nextech.tooltip.requires_fluid": "Needs: %s",
+
+    "block.nextech.fracto_liminal_abyss_metal_engine": "§5Fracto-§6Liminal §1Abyss §3Metal §4Engine §r(FLAME)",
+    "block.nextech.flame_fuel_hatch": "FLAME Fuel Hatch",
+
+    "item.nextech.living_data_disk": "§4Living Data Disk",
+    "item.nextech.living_data_disk.tooltip": "§7Comprised of Life, enclosed by alloys and metals to be used for §3Data Storage",
+    "itemGroup.nextech.creative_tab_machines": "NT-R: Machines",
+    "itemGroup.nextech.creative_tab_items": "NT-R: Items",
+
+    "tagprefix.chainlet": "%s Chainlet",
+    "tagprefix.chain_mesh": "%s Chain Mesh"
+}

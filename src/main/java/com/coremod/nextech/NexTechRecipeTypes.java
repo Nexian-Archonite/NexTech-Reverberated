@@ -31,6 +31,17 @@ public class NexTechRecipeTypes {
                         "nextech.recipe.temperature",
                         FormattingUtil.formatNumbers(temp)) : "";
             })
+            .addDataInfo(data -> {
+                if (!data.getBoolean("flame_fuel")) return "";
+
+                int heatPerCycle = data.getInt("heat_per_cycle");
+                int heatCap = data.getInt("heat_cap");
+
+                return LocalizationUtils.format(
+                        "nextech.recipe.heat_per_cycle",
+                        FormattingUtil.formatNumbers(heatPerCycle),
+                        FormattingUtil.formatNumbers(heatCap));
+            })
             .setSound(GTSoundEntries.FURNACE);
 
     public static void init() {}

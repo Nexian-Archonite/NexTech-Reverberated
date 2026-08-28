@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "nextech:block/casings/computer_casing/bottom",
+    "side": "nextech:block/casings/computer_casing/computer_casing",
+    "top": "nextech:block/casings/computer_casing/top"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "nextech:block/machine/phoenix_heat_sink_component",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "nextech:block/machine/phoenix_heat_sink_component",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nextech:block/machine/phoenix_heat_sink_component"
+    },
+    "facing=south": {
+      "model": "nextech:block/machine/phoenix_heat_sink_component",
+      "y": 180
+    },
+    "facing=up": {
+      "gtceu:z": 180,
+      "model": "nextech:block/machine/phoenix_heat_sink_component",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "nextech:block/machine/phoenix_heat_sink_component",
+      "y": 270
+    }
+  }
+}

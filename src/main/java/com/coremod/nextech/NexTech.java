@@ -1,7 +1,10 @@
 package com.coremod.nextech;
 
+import com.coremod.nextech.configs.NexicConfigs;
 import com.coremod.nextech.machine.Hatch;
 import com.coremod.nextech.machine.flame.flame;
+import com.coremod.nextech.machine.hpca.NexTechResearchMachines;
+import com.coremod.nextech.machine.hpca.Omnience;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
@@ -36,6 +39,7 @@ public class NexTech {
 
     public NexTech() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        NexicConfigs.init();
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
@@ -55,6 +59,10 @@ public class NexTech {
         // we need to register our object like this!
         MinecraftForge.EVENT_BUS.register(this);
         NEXTECH_REGISTRATE.registerRegistrate();
+    }
+
+    public static void init() {
+        NexTechBlocks.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -131,7 +139,9 @@ public class NexTech {
      */
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         flame.init();
+        Omnience.init();
         Hatch.init();
+        NexTechResearchMachines.init();
     }
 
     /**

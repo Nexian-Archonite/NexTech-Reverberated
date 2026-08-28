@@ -12,6 +12,10 @@ import static com.gregtechceu.gtceu.common.data.GTItems.attach;
 
 public class NexTechItems {
 
+    static {
+        NexTech.NEXTECH_REGISTRATE.creativeModeTab(() -> CreativeTabs.NEXTECH_ITEMS_TAB);
+    }
+
     public static ItemEntry<ComponentItem> LIVING_DATA_DISK;
 
     public static void init() {

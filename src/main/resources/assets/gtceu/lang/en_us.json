@@ -1,0 +1,8 @@
+{
+  "tagprefix.chainlet": "%s Chainlet",
+  "tagprefix.chain_mesh": "%s Chain Mesh",
+
+  "gtceu.tooltip.uses_custom_coolant": "Uses %s if in the Omnience and PCB Coolant if in the normal HPCA",
+  "gtceu.tooltip.custom_coolant": "%s, or %s, or %s"
+
+}

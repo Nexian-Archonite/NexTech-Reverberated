@@ -1,6 +1,6 @@
 package com.coremod.nextech;
 
-import com.coremod.nextech.recipe.recipes.NexTechRecipes;
+import com.coremod.nextech.data.recipe.recipes.NexTechRecipes;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
@@ -16,6 +16,8 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 @GTAddon
 public class NexTechAddon implements IGTAddon {
+
+    public static final String MOD_ID = "nextech";
 
     @Override
     public GTRegistrate getRegistrate() {

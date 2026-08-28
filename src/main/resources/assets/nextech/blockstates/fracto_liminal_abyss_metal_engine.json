@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "nextech:block/machine/fracto_liminal_abyss_metal_engine" },
+    "facing=south": { "model": "nextech:block/machine/fracto_liminal_abyss_metal_engine", "y": 180 },
+    "facing=west": { "model": "nextech:block/machine/fracto_liminal_abyss_metal_engine", "y": 270 },
+    "facing=east": { "model": "nextech:block/machine/fracto_liminal_abyss_metal_engine", "y": 90 }
+  }
+}

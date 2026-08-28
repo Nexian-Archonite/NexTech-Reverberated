@@ -1,4 +1,4 @@
-package com.coremod.nextech.recipe.recipes;
+package com.coremod.nextech.data.recipe.recipes;
 
 import com.coremod.nextech.NexTechMaterialFlags;
 import com.coremod.nextech.NexTechTagPrefixes;
@@ -32,7 +32,7 @@ public class NexTechRecipes {
                 FORGE_HAMMER_RECIPES.recipeBuilder(String.format("hammer_%s_chainlet", material.getName()))
                         .inputItems(TagPrefix.ring, material)
                         .outputItems(NexTechTagPrefixes.chainlet, material)
-                        .duration((int) (material.getMass() * 2))
+                        .duration((int) (material.getMass() * 0.125))
                         .EUt(GTValues.VA[GTValues.LV])
                         .save(provider);
             }
@@ -41,7 +41,7 @@ public class NexTechRecipes {
                 FORMING_PRESS_RECIPES.recipeBuilder(String.format("press_%s_chain_mesh", material.getName()))
                         .inputItems(NexTechTagPrefixes.chainlet, material, 16)
                         .outputItems(NexTechTagPrefixes.chainMesh, material)
-                        .duration((int) (material.getMass() * 16))
+                        .duration((int) (material.getMass() * 4))
                         .EUt(GTValues.VA[GTValues.LV])
                         .save(provider);
             }

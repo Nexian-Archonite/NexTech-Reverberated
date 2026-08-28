@@ -49,23 +49,19 @@ public class FLAMERecipeModifier {
 
         int intervals = Math.max(
                 0,
-                (flameTemp - recipeTemp) / 50);
+                (flameTemp - recipeTemp) / 100);
 
         /*
          * 2^n parallels.
          */
-        int requestedParallels;
-
-        if (intervals >= 30) {
-            requestedParallels = Integer.MAX_VALUE;
-        } else {
-            requestedParallels = 1 << intervals;
-        }
+        int parallelIntervals = Math.min(intervals, 5);
+        int requestedParallels = 1 << parallelIntervals;
 
         int maxParallels = ParallelLogic.getParallelAmountWithoutEU(
                 machine,
                 recipe,
                 requestedParallels);
+        flameMachine.maxParallels = maxParallels; // set it on the machine
 
         /*
          * 0.95^n duration.

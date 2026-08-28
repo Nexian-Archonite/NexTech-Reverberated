@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "nextech:block/machine/flame_fuel_hatch",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "nextech:block/machine/flame_fuel_hatch",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nextech:block/machine/flame_fuel_hatch"
+    },
+    "facing=south": {
+      "model": "nextech:block/machine/flame_fuel_hatch",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "nextech:block/machine/flame_fuel_hatch",
+      "x": 270,
+      "z": 180
+    },
+    "facing=west": {
+      "model": "nextech:block/machine/flame_fuel_hatch",
+      "y": 270
+    }
+  }
+}

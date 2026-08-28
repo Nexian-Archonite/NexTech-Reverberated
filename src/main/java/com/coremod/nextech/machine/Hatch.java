@@ -1,5 +1,6 @@
 package com.coremod.nextech.machine;
 
+import com.coremod.nextech.CreativeTabs;
 import com.coremod.nextech.NexTech;
 import com.coremod.nextech.machine.partAbility.FLAMEFuelHatch;
 import com.coremod.nextech.machine.partAbility.FLAMEPartAbilities;
@@ -12,6 +13,10 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
 
 public class Hatch {
+
+    static {
+        NexTech.NEXTECH_REGISTRATE.creativeModeTab(() -> CreativeTabs.NEXTECH_MACHINES_TAB);
+    }
 
     public static final MachineDefinition FLAME_FUEL_HATCH = NexTech.NEXTECH_REGISTRATE
             .machine("flame_fuel_hatch",
