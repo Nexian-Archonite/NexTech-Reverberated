@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "loader": "gtceu:machine",
-  "machine": "nextech:active_cooling_component",
+  "machine": "nextech:nexic_cooling_component",
   "variants": {
     "active=false,hpca_part_damaged=false,is_formed=false": {
       "model": {

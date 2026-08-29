@@ -1,0 +1,10 @@
+{
+  "parent": "gtceu:block/machine/template/part/hpca_part_machine",
+  "textures": {
+    "back": "nextech:block/casings/computer_casing/back",
+    "bottom": "nextech:block/casings/computer_casing/bottom",
+    "front": "nextech:block/casings/computer_casing/front",
+    "side": "nextech:block/casings/computer_casing/side",
+    "top": "nextech:block/casings/computer_casing/top"
+  }
+}

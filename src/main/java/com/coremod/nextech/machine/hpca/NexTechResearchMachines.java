@@ -26,7 +26,7 @@ public class NexTechResearchMachines {
     public static MachineDefinition OMNIC_COMPUTATION_COMPONENT;
     public static MachineDefinition NEXIC_COMPUTATION_COMPONENT;
     public static MachineDefinition OMNIC_COOLER_COMPONENT;
-    public static MachineDefinition ACTIVE_NEXIC_COOLER_COMPONENT;
+    public static MachineDefinition NEXIC_COOLER_COMPONENT;
 
     static {
         // Here we define your new custom HPCA part.
@@ -80,7 +80,7 @@ public class NexTechResearchMachines {
                         Component.translatable("gtceu.part_sharing.disabled"))
                 .register();
 
-        ACTIVE_NEXIC_COOLER_COMPONENT = registerCoolingHPCAPart(
+        NEXIC_COOLER_COMPONENT = registerCoolingHPCAPart(
                 "nexic_cooling_component", "Active Nexic Cooling Component",
                 // Use a lambda to correctly pass the 'advanced' boolean
                 holder -> new NexicCoolerPartMachine(holder, true),
