@@ -59,8 +59,8 @@ public class FLAMEMachine extends CoilWorkableElectricMultiblockMachine {
     }
 
     public static final Map<Material, Integer> FLAME_FUEL_HEAT = Map.of(
-            GTMaterials.get("inactivated_infernality"), 150,
-            GTMaterials.get("infernality_catalysm"), 400);
+            GTMaterials.get("inactivated_infernality"), 750,
+            GTMaterials.get("infernality_catalysm"), 1450);
 
     public double getHeatingEfficiencyMultiplier() {
         int coilTemperature = getCoilType().getCoilTemperature();
@@ -70,7 +70,7 @@ public class FLAMEMachine extends CoilWorkableElectricMultiblockMachine {
 
         while (coilTemperature >= threshold) {
             efficiencySteps++;
-            threshold *= 4;
+            threshold *= 3;
         }
 
         return Math.pow(1.05D, efficiencySteps);

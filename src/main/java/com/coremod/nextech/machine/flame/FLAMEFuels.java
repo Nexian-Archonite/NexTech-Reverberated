@@ -24,10 +24,10 @@ public class FLAMEFuels {
     public static void init() {
         register(
                 com.gregtechceu.gtceu.common.data.GTMaterials.get("inactivated_infernality"),
-                150);
+                25);
 
         register(
                 com.gregtechceu.gtceu.common.data.GTMaterials.get("infernality_catalysm"),
-                400);
+                60);
     }
 }

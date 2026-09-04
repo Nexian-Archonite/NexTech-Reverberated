@@ -96,15 +96,15 @@ public class NexicConfigs {
         public String ActiveCoolerCoolant2 = "bose-einstein_oganesson-xenon_trifluoride_condensate_plasma";
         @Configurable
         @Configurable.Comment({
-                "How much ActiveCoolerCoolant1 boosts base CWU/t ()" })
+                "Base CWU/t multiplier with no special coolant" })
         public double BaseCoolantBoost = 1.0;
         @Configurable
         @Configurable.Comment({
-                "How much ActiveCoolerCoolant1 boosts base CWU/t ()" })
+                "How much ActiveCoolerCoolant1 boosts base CWU/t" })
         public double CoolantBoost1 = 1.3;
         @Configurable
         @Configurable.Comment({
-                "What Strongest Coolant the Active Omnic Cooler uses when in the PHPCA (Gt or GT Kubejs Material)" })
+                "How much ActiveCoolerCoolant2 boosts base CWU/t" })
         public double CoolantBoost2 = 1.6;
     }
 }

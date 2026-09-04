@@ -82,7 +82,7 @@ public class Omnience {
                         .aisle("accccccca", "bdddfdddb", "bdddedddb", "bdddfdddb", "accccccca")
                         .aisle("accccccca", "beeefeeeb", "beeeeeeeb", "beeefeeeb", "accccccca")
                         .aisle("accccccca", "bdddedddb", "bdddedddb", "bdddedddb", "accccccca")
-                        .aisle("aaaagaaaa", "afffffffa", "afffifffa", "afffffffa", "aaaaaaaaa")
+                        .aisle("aaaagaaaa", "afffifffa", "afffifffa", "afffifffa", "aaaaaaaaa")
 
                         .where('a', blocks(NexTechBlocks.STURVENE_COMPUTER_CASING.get()))
                         .where('b', blocks(FUSION_GLASS.get()))
@@ -92,17 +92,22 @@ public class Omnience {
                                 .or(blocks(GTResearchMachines.HPCA_EMPTY_COMPONENT.get()))
                                 .or(blocks(GTResearchMachines.HPCA_BRIDGE_COMPONENT.get()))
                                 .or(blocks(NexTechResearchMachines.NEXIC_COMPUTATION_COMPONENT.get()))
-                                .or(blocks(NexTechResearchMachines.OMNIC_COMPUTATION_COMPONENT.get()))
-                        )
-                        .where("e", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("gtceu", "abyssal_netherite_pipe_casing"))))
+                                .or(blocks(NexTechResearchMachines.OMNIC_COMPUTATION_COMPONENT.get())))
+                        .where("e",
+                                Predicates.blocks(ForgeRegistries.BLOCKS
+                                        .getValue(new ResourceLocation("gtceu", "abyssal_netherite_pipe_casing"))))
                         .where('f', any())
                         .where('g', controller(blocks(definition.getBlock())))
                         .where('h', blocks(NexTechBlocks.STURVENE_COMPUTER_CASING.get())
-                                .or(Predicates.abilities(PartAbility.COMPUTATION_DATA_TRANSMISSION).setMaxGlobalLimited(1)))
-                        .where('i', Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft", "stripped_jungle_wood"))))
+                                .or(Predicates.abilities(PartAbility.COMPUTATION_DATA_TRANSMISSION)
+                                        .setMaxGlobalLimited(1)))
+                        .where('i', blocks(NexTechBlocks.STURVENE_COMPUTER_CASING.get())
+                                .or(Predicates.abilities(PartAbility.INPUT_ENERGY, PartAbility.INPUT_LASER)
+                                        .setMaxGlobalLimited(1))
+                                .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS))
+                                .or(Predicates.abilities(PartAbility.MAINTENANCE).setMaxGlobalLimited(1)))
                         .build())
-
-                .workableCasingModel(NexTech.id("block/casings/advanced_computer_casing/advanced_computer_casing"),
+                .workableCasingModel(NexTech.id("block/casings/computer_casing/computer_casing"),
                         GTCEu.id("block/multiblock/hpca"))
                 .register();
     }

@@ -7,11 +7,11 @@ import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank;
 
-public class FLAMEFuelHatch extends TieredIOPartMachine {
+public class SingularityPlasmaHatch extends TieredIOPartMachine {
 
     public final NotifiableFluidTank fluidTank;
 
-    public FLAMEFuelHatch(IMachineBlockEntity holder, int tier, IO io) {
+    public SingularityPlasmaHatch(IMachineBlockEntity holder, int tier, IO io) {
         super(holder, tier, io);
 
         this.fluidTank = new NotifiableFluidTank(

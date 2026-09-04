@@ -49,7 +49,7 @@ public class FLAMERecipeModifier {
 
         int intervals = Math.max(
                 0,
-                (flameTemp - recipeTemp) / 100);
+                (flameTemp - recipeTemp) / 300);
 
         /*
          * 2^n parallels.
